@@ -85,7 +85,11 @@ public class HelloWorld {
             int n = arr[i].length;
             for (int j = 0; j < n - 1; j++) {
                 for (int k = 0; k < n - j - 1; k++) {
-                    if (secondDigit(arr[i][k]) > secondDigit(arr[i][k + 1])) {
+                    char[] firstNum = String.valueOf(arr[i][k]).toCharArray();
+                    char[] secondNum = String.valueOf(arr[i][k + 1]).toCharArray();
+                    int n1=firstNum.length;
+                    int n2=secondNum.length;
+                    if (getNthDigit(arr[i][k],10,n1-1) > getNthDigit(arr[i][k + 1],10,n2-1)) {
                         int temp = arr[i][k];
                         arr[i][k] = arr[i][k + 1];
                         arr[i][k + 1] = temp;
@@ -98,13 +102,10 @@ public class HelloWorld {
         return arr;
 
     }
-    public static int secondDigit(int n) {
-        // Remove last digit from number
-        // till only two digit is left
-        while (n >= 100)
-            n /= 10;
 
-        // return the first digit
-        return n;
+    public static int getNthDigit(int number, int base, int n) {
+        return (int) ((number / Math.pow(base, n - 1)) % base);
     }
+
+
 }
